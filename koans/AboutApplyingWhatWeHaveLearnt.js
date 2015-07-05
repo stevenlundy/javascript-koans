@@ -101,14 +101,37 @@ describe("About Applying What We Have Learnt", function() {
   });
 
   /*********************************************************************************/
-  /* UNCOMMENT FOR EXTRA CREDIT */
-  /*
+  /* EXTRA CREDIT */
+
   it("should find the largest prime factor of a composite number", function () {
-  
+    function getPrimeFactors(number){
+      var primeFactors = [];
+      var primes = [2,3,5,7,11];
+      var primeIndex = 0;
+      while(number > 1){
+        if(number%primes[primeIndex] === 0){
+          primeFactors.push(primes[primeIndex]);
+          number /= primes[primeIndex];
+        } else {
+          primeIndex++;
+          if(primeIndex >= primes.length){
+            addPrime(primes);
+          }
+        }
+      }
+      return primeFactors;
+    }
+    function biggestPrimeFactor(number){
+      var primeFactors = getPrimeFactors(number);
+      return primeFactors.pop();
+    }
+    expect(biggestPrimeFactor(12)).toBe(3);
+    expect(biggestPrimeFactor(33)).toBe(11);
   });
 
   it("should find the largest palindrome made from the product of two 3 digit numbers", function () {
     
+
   });
 
   it("should find the smallest number divisible by each of the numbers 1 to 20", function () {
@@ -123,5 +146,5 @@ describe("About Applying What We Have Learnt", function() {
   it("should find the 10001st prime", function () {
 
   });
-  */
+
 });
