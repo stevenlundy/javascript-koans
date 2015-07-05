@@ -116,25 +116,25 @@ describe("About Applying What We Have Learnt", function() {
     } while(!isPrime);
     primes.push(primeCandidate);
   }
-
-  it("should find the largest prime factor of a composite number", function () {
-    function getPrimeFactors(number){
-      var primeFactors = [];
-      var primes = [2,3,5,7,11];
-      var primeIndex = 0;
-      while(number > 1){
-        if(number%primes[primeIndex] === 0){
-          primeFactors.push(primes[primeIndex]);
-          number /= primes[primeIndex];
-        } else {
-          primeIndex++;
-          if(primeIndex >= primes.length){
-            addPrime(primes);
-          }
+  function getPrimeFactors(number){
+    var primeFactors = [];
+    var primes = [2,3,5,7,11];
+    var primeIndex = 0;
+    while(number > 1){
+      if(number%primes[primeIndex] === 0){
+        primeFactors.push(primes[primeIndex]);
+        number /= primes[primeIndex];
+      } else {
+        primeIndex++;
+        if(primeIndex >= primes.length){
+          addPrime(primes);
         }
       }
-      return primeFactors;
     }
+    return primeFactors;
+  }
+
+  it("should find the largest prime factor of a composite number", function () {
     function biggestPrimeFactor(number){
       var primeFactors = getPrimeFactors(number);
       return primeFactors.pop();
@@ -148,10 +148,12 @@ describe("About Applying What We Have Learnt", function() {
     function isPalindrome(num){
       return num.toString() === num.toString().split("").reverse().join("");
     }
-    function maxPalindromeProduct(){
+    function maxPalindromeProduct(digits){
       var largestPalindrome = 0;
-      for(var i = 100; i < 1000; i++){
-        for(var j = 100; j < 1000; j++){
+      var max = Math.pow(10,digits);
+      var min = max/10;
+      for(var i = min; i < max; i++){
+        for(var j = min; j < max; j++){
           var prod = i*j;
           if(isPalindrome(prod) && prod > largestPalindrome){
             largestPalindrome = prod;
@@ -161,13 +163,30 @@ describe("About Applying What We Have Learnt", function() {
       return largestPalindrome;
     }
 
-    //expect(maxPalindromeProduct(2)).toBe(9009)
+    expect(maxPalindromeProduct(2)).toBe(9009)
     expect(maxPalindromeProduct(3)).toBe(906609);
   });
 
   it("should find the smallest number divisible by each of the numbers 1 to 20", function () {
     function smallestMultiple(num){
-
+      /*
+      _.range(1,num+1).map(function(a){
+        getPrimeFactors(a)
+      })
+*/
+      var isDivisible = false;
+      for(var i=num*num; ; i+= num){
+        var isDivisible = true;
+        for(var j=1; j<=num; j++){
+          if(i%j !== 0){
+            isDivisible = false;
+            break;
+          }
+        }
+        if(isDivisible){
+          return i;
+        }
+      }
     }
     
     expect(smallestMultiple(10)).toBe(2520);
