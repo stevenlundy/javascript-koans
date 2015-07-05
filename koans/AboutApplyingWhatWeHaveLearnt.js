@@ -121,12 +121,27 @@ describe("About Applying What We Have Learnt", function() {
       }
       return primeFactors;
     }
+    function addPrime(primes){
+      var primeCandidate = primes[primes.length - 1] + 2;
+      do {
+        var isPrime = true;
+        for(var i = 0; primes[i] <= Math.sqrt(primeCandidate); i++){
+          if(primeCandidate%primes[i] === 0){
+            isPrime === false;
+            primeCandidate += 2;
+            break;
+          }
+        }
+      } while(!isPrime);
+      primes.push(primeCandidate);
+    }
     function biggestPrimeFactor(number){
       var primeFactors = getPrimeFactors(number);
       return primeFactors.pop();
     }
     expect(biggestPrimeFactor(12)).toBe(3);
     expect(biggestPrimeFactor(33)).toBe(11);
+    expect(biggestPrimeFactor(62)).toBe(31);
   });
 
   it("should find the largest palindrome made from the product of two 3 digit numbers", function () {
