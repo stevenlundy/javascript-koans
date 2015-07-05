@@ -145,17 +145,50 @@ describe("About Applying What We Have Learnt", function() {
   });
 
   it("should find the largest palindrome made from the product of two 3 digit numbers", function () {
-    
+    function isPalindrome(num){
+      return num.toString() === num.toString().split("").reverse().join("");
+    }
+    function maxPalindromeProduct(){
+      var largestPalindrome = 0;
+      for(var i = 100; i < 1000; i++){
+        for(var j = 100; j < 1000; j++){
+          var prod = i*j;
+          if(isPalindrome(prod) && prod > largestPalindrome){
+            largestPalindrome = prod;
+          }
+        }
+      }
+      return largestPalindrome;
+    }
 
+    //expect(maxPalindromeProduct(2)).toBe(9009)
+    expect(maxPalindromeProduct(3)).toBe(906609);
   });
 
   it("should find the smallest number divisible by each of the numbers 1 to 20", function () {
-      
+    function smallestMultiple(num){
+
+    }
     
+    expect(smallestMultiple(10)).toBe(2520);
+    expect(smallestMultiple(20)).toBe(232792560)
   });
 
   it("should find the difference between the sum of the squares and the square of the sums", function () {
+    function sumSquareDiff(num){
+      var sumSquare = _.range(1,num+1).map(function(a){
+        return a*a;
+      }).reduce(function(a,b){
+        return a+b;
+      });
+      var sum = _.range(1,num+1).reduce(function(a,b){
+        return a+b;
+      });
+      return sum*sum-sumSquare;
+    }
     
+    expect(sumSquareDiff(10)).toBe(3025-385);
+    expect(sumSquareDiff(100)).toBe(25164150);
   });
 
   it("should find the 10001st prime", function () {
