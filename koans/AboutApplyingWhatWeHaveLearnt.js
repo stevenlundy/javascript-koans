@@ -102,6 +102,20 @@ describe("About Applying What We Have Learnt", function() {
 
   /*********************************************************************************/
   /* EXTRA CREDIT */
+  function addPrime(primes){
+    var primeCandidate = primes[primes.length - 1] + 2;
+    do {
+      var isPrime = true;
+      for(var i = 0; primes[i] <= Math.sqrt(primeCandidate); i++){
+        if(primeCandidate%primes[i] === 0){
+          isPrime = false;
+          primeCandidate += 2;
+          break;
+        }
+      }
+    } while(!isPrime);
+    primes.push(primeCandidate);
+  }
 
   it("should find the largest prime factor of a composite number", function () {
     function getPrimeFactors(number){
@@ -120,20 +134,6 @@ describe("About Applying What We Have Learnt", function() {
         }
       }
       return primeFactors;
-    }
-    function addPrime(primes){
-      var primeCandidate = primes[primes.length - 1] + 2;
-      do {
-        var isPrime = true;
-        for(var i = 0; primes[i] <= Math.sqrt(primeCandidate); i++){
-          if(primeCandidate%primes[i] === 0){
-            isPrime === false;
-            primeCandidate += 2;
-            break;
-          }
-        }
-      } while(!isPrime);
-      primes.push(primeCandidate);
     }
     function biggestPrimeFactor(number){
       var primeFactors = getPrimeFactors(number);
@@ -159,7 +159,17 @@ describe("About Applying What We Have Learnt", function() {
   });
 
   it("should find the 10001st prime", function () {
+    function getPrimeN(n){
+      var primes = [2,3,5,7,11,13];
+      while(primes.length < n){
+        addPrime(primes);
+      }
+      return primes[n-1];
+    }
 
+    expect(getPrimeN(5)).toBe(11);
+    expect(getPrimeN(100)).toBe(541);
+    expect(getPrimeN(10001)).toBe(104743);
   });
 
 });
