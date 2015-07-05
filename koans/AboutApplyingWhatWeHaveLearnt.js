@@ -169,11 +169,12 @@ describe("About Applying What We Have Learnt", function() {
 
   it("should find the smallest number divisible by each of the numbers 1 to 20", function () {
     function smallestMultiple(num){
-      /*
+      /* Functional
       _.range(1,num+1).map(function(a){
         getPrimeFactors(a)
       })
 */
+      //Imperative
       var isDivisible = false;
       for(var i=num*num; ; i+= num){
         var isDivisible = true;
